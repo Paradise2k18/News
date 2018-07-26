@@ -4,14 +4,16 @@ import * as Assets from 'assets';
 import styles from './styles';
 
 export default ({ userName, imageSource, likesCount, commentsCount, date }) => (
-  <View style={{ flex: 1, height: 200 }}>
-    <View style={{ alignSelf: 'center'}}>
+  <View style={{ height: 500 }}>
+    <View style={{ height: 35, alignSelf: 'center'}}>
       <Text>
         {userName}
       </Text>
     </View>
-    <Image source={{uri: imageSource}}/>
-    <View style={{ flex: 1, justifyContent: 'space-between' }}>
+    <Image 
+      style={{ flex: 1}}
+      source={{uri: imageSource}}/>
+    <View style={{ flex: 1,flexDirection: 'row', justifyContent: 'space-between' }}>
       <View>
         <Image />
         <Text>
