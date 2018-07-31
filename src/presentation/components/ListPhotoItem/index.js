@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Image, TouchableOpacity, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { CachedImage } from 'react-native-cached-image';
 import * as Assets from 'assets';
 import styles from './styles';
 
 export default ({ userName, imageSource, likesCount, commentsCount, date }) => (
-  <View style={{ flex:1, borderBottomWidth: 2, borderColor: '#0003'}}>
+  <View style={{ height:400, borderBottomWidth: 2, borderColor: '#0003' }}>
     <View style={{ padding: 15, alignSelf: 'center'}}>
       <Text style={{ fontWeight: 'bold', fontSize: 17 }}>
         {userName}
@@ -13,17 +13,20 @@ export default ({ userName, imageSource, likesCount, commentsCount, date }) => (
     </View>
     <CachedImage 
       style={{ height: 300}}
-      source={{uri: imageSource}}/>
+      source={{uri: imageSource}}
+      defaultSource={Assets.placeholder}
+      fallbackSource={Assets.placeholder}      
+      />
     <View style={{ flex: 1,flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
       <View style={{ flexDirection: 'row'}}>
         <Image source={Assets.iconHeart}/>
-        <Text>
+        <Text style={{ marginLeft: 2 }}>
           {likesCount}
         </Text>
       </View>
       <View style={{ flexDirection: 'row', marginLeft: 60}}>
         <Image source={Assets.iconComments}/>
-        <Text>
+        <Text style={{ marginLeft: 2, color: '#0080ff' }}>
           {commentsCount}
         </Text>
       </View>
