@@ -5,7 +5,7 @@ import * as Assets from 'assets';
 import styles from './styles';
 
 export default ({ userName, imageSource, likesCount, commentsCount, date }) => (
-  <View style={{ height:400, borderBottomWidth: 2, borderColor: '#0003' }}>
+  <View style={{ height:410, borderBottomWidth: 2, borderColor: '#0003' }}>
     <View style={{ padding: 15, alignSelf: 'center'}}>
       <Text style={{ fontWeight: 'bold', fontSize: 17 }}>
         {userName}
