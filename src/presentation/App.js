@@ -5,23 +5,10 @@ import data from '../data/Data.json';
 
 export default class App extends Component {
   state = { items: [] };
+  date = new Date();
  
   componentWillMount() {
    this.setState({ items: data });
-  }
-
-
-  renderAlbums() {
-    return this.state.items.map(item =>
-        <ListItem
-          key={item.identifier}  
-          userName = {item.userName}
-          likesCount = "5"
-          commentsCount = {item.commentsCount}
-          date = "March"
-          imageSource= {item.imageURL} 
-      />   
-    );
   }
 
   render() {
@@ -31,7 +18,21 @@ export default class App extends Component {
           headerText="News"
         />
         <ScrollView>
-         {this.renderAlbums()}
+        <For
+          each="item"
+          of={this.state.items}
+        >
+        <If condition={item.type === "photoPost"}>
+          <ListItem
+            key={item.identifier} 
+            userName={item.userName}
+            imageSource={item.imageURL}
+            likesCount={item.likesCount}
+            commentsCount={item.commentsCount}
+            date={this.date.toDateString()}
+          />
+        </If>
+        </For>
          </ScrollView>
       </View>
     );
