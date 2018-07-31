@@ -55,14 +55,14 @@ export default class App extends Component {
             <Choose>
               <When condition={this.state.segmentSelected === "all"}>
                 <If condition={item.type === "photoPost"}>
-                <ListPhotoItem
-                  key={item.identifier} 
-                  userName={item.userName}
-                  imageSource={item.imageURL}
-                  likesCount={item.likesCount}
-                  commentsCount={item.commentsCount}
-                  date={this.date.toDateString()}
-                />
+                  <ListPhotoItem
+                    key={item.identifier} 
+                    userName={item.userName}
+                    imageSource={item.imageURL}
+                    likesCount={item.likesCount}
+                    commentsCount={item.commentsCount}
+                    date={this.date.toDateString()}
+                  />
               </If>
               <If condition={item.type === "messagePost"}>
                 <ListMessageItem 
