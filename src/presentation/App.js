@@ -6,8 +6,7 @@ import data from '../data/Data.json';
 import styles from './styles'
 
 export default class App extends Component {
-  state = { items: [], segmentSelected: "all", isOpen: false };
-  date = new Date();
+  state = { items: [], segmentSelected: "all", isOpen: false, date : new Date().toDateString() };
  
   componentWillMount() {
    this.setState({ items: data });
@@ -17,21 +16,21 @@ export default class App extends Component {
     if (this.state.isOpen) {
       this.setState({ isOpen: false })
     };
-    this.setState({ segmentSelected: "all" })
+    this.setState({ segmentSelected: "all" });
   }
 
   setSegmentToPhoto = () => {
     if (this.state.isOpen) {
       this.setState({ isOpen: false })
     };
-    this.setState({ segmentSelected: "photo" })
+    this.setState({ segmentSelected: "photo" });
   }
 
   setSegmentToMessage = () => {
     if (this.state.isOpen) {
       this.setState({ isOpen: false })
     };
-    this.setState({ segmentSelected: "message" })
+    this.setState({ segmentSelected: "message" });
   }
 
   updateMenuState(isOpen) {
@@ -42,29 +41,32 @@ export default class App extends Component {
     return (
       <If condition={this.state.isOpen}>
         <View style={{ paddingTop: 28 }}>
-          <View style={{ alignItems: 'center', borderBottomWidth: 2, borderBottomColor: '#0003', paddingBottom: 10 }}>
-            <Text style={{ fontSize: 26 }}>
+          <View style={styles.menuContainerStyle}>
+            <Text style={{ fontSize: 26, fontWeight: 'bold' }}>
               Menu
             </Text>
           </View>
           <TouchableOpacity
-            style={{ alignItems: 'center', paddingTop: 10, borderBottomWidth: 2, borderBottomColor: '#0003', paddingBottom: 10 }} 
-            onPress={this.setSegmentToAll}>
-            <Text style={{ fontSize: 20 }}>
+            style={styles.menuContainerStyle} 
+            onPress={this.setSegmentToAll}
+          >
+            <Text style={styles.menuTextSize}>
               All
             </Text>
           </TouchableOpacity >
           <TouchableOpacity 
-           style={{ alignItems: 'center', paddingTop: 10, borderBottomWidth: 2, borderBottomColor: '#0003', paddingBottom: 10 }} 
-            onPress={this.setSegmentToPhoto}>
-            <Text style={{ fontSize: 20 }}>
+            style={styles.menuContainerStyle} 
+            onPress={this.setSegmentToPhoto}
+          >
+            <Text style={styles.menuTextSize}>
               Photo
             </Text>
           </TouchableOpacity>
           <TouchableOpacity 
-            style={{ alignItems: 'center', paddingTop: 10, borderBottomWidth: 2, borderBottomColor: '#0003', paddingBottom: 10 }}
-            onPress={this.setSegmentToMessage}>
-            <Text style={{ fontSize: 20 }}>
+            style={styles.menuContainerStyle}
+            onPress={this.setSegmentToMessage}
+          >
+            <Text style={styles.menuTextSize}>
               Message
             </Text>
           </TouchableOpacity>
@@ -115,7 +117,7 @@ export default class App extends Component {
                       imageSource={item.imageURL}
                       likesCount={item.likesCount}
                       commentsCount={item.commentsCount}
-                      date={this.date.toDateString()}
+                      date={this.state.date}
                     />
                 </If>
                 <If condition={item.type === "messagePost"}>
@@ -125,7 +127,7 @@ export default class App extends Component {
                     userImage={item.imageURL}
                     commentsCount={item.commentsCount}
                     message={item.message}
-                    date={this.date.toDateString()}
+                    date={this.state.date}
                   />
                 </If>
                 </When>
@@ -137,7 +139,7 @@ export default class App extends Component {
                       imageSource={item.imageURL}
                       likesCount={item.likesCount}
                       commentsCount={item.commentsCount}
-                      date={this.date.toDateString()}
+                      date={this.state.date}
                     />
                   </If>
                 </When>
@@ -149,7 +151,7 @@ export default class App extends Component {
                       userImage={item.imageURL}
                       commentsCount={item.commentsCount}
                       message={item.message}
-                      date={this.date.toDateString()}
+                      date={this.state.date}
                     />
                   </If>
                 </When>

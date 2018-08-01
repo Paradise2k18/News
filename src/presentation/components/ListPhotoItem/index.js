@@ -5,7 +5,7 @@ import * as Assets from 'assets';
 import styles from './styles';
 
 export default ({ userName, imageSource, likesCount, commentsCount, date }) => (
-  <View style={{ height:410, borderBottomWidth: 2, borderColor: '#0003' }}>
+  <View style={styles.mainContainerStyle}>
     <View style={{ padding: 15, alignSelf: 'center'}}>
       <Text style={{ fontWeight: 'bold', fontSize: 17 }}>
         {userName}
@@ -17,7 +17,7 @@ export default ({ userName, imageSource, likesCount, commentsCount, date }) => (
       defaultSource={Assets.placeholder}
       fallbackSource={Assets.placeholder}      
       />
-    <View style={{ flex: 1,flexDirection: 'row', justifyContent: 'space-between', padding: 15 }}>
+    <View style={styles.bottomContainerStyle}>
       <View style={{ flexDirection: 'row'}}>
         <Image source={Assets.iconHeart}/>
         <Text style={{ marginLeft: 2 }}>

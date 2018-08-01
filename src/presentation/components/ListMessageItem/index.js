@@ -7,7 +7,7 @@ import styles from './styles';
 export default ({ userName, userImage, message, commentsCount, date }) => (
   <View style={{ borderBottomWidth: 2, borderColor: '#0003' }}>
     <View style={{ flexDirection: 'row'}}>
-      <View style={{ width: 70, height: 70, marginTop: 15, marginLeft: 15 }}>
+      <View style={styles.userContainerStyle}>
         <CachedImage
           style={{ flex: 1, borderRadius: 35 }}
           source={{ uri: userImage }}
@@ -17,7 +17,7 @@ export default ({ userName, userImage, message, commentsCount, date }) => (
       </View>
       <View style={{ flex:1, padding: 15 }}>
         <View style={{ flexDirection: 'row' }}>
-          <Text style={{ flex:1, fontWeight: 'bold', fontSize: 17, marginBottom: 10 }}>
+          <Text style={styles.userNameTextStyle}>
             {userName}
           </Text>
           <Text>

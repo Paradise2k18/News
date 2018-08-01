@@ -54,4 +54,13 @@ export default StyleSheet.create({
     borderTopRightRadius: 5,
     borderBottomRightRadius: 5,
   },
+  menuContainerStyle: {
+    alignItems: 'center', 
+    borderBottomWidth: 2, 
+    borderBottomColor: '#0003', 
+    paddingBottom: 10,
+  },
+  menuTextSize: {
+    fontSize: 18,
+  }
 });
