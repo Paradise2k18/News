@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
+import { Provider } from 'react-redux';
 import { Text, View, ScrollView, TouchableOpacity, Dimensions} from 'react-native'
 import { ListPhotoItem, ListMessageItem, Header } from 'components';
 import SideMenu from 'react-native-side-menu';
-import data from '../data/Data.json';
+import data from '../reducers/data.json';
 import styles from './styles'
+import store from '../store';
 
 export default class App extends Component {
   state = { items: [], segmentSelected: "all", isOpen: false, date : new Date().toDateString() };
@@ -77,73 +79,50 @@ export default class App extends Component {
 
   render() {
     return (
-      <SideMenu 
-        menu={this.renderMenu()}
-        isOpen={this.state.isOpen}
-        onChange={isOpen => this.updateMenuState(isOpen)}
-      >
-        <View>
-          <Header
-            headerText="News"
-          />
-          <View style={{ flexDirection: 'row', height: 40 }}>
-            <TouchableOpacity 
-              onPress={this.setSegmentToAll}
-              style={this.state.segmentSelected === "all" ? styles.segmentBoxSelectedLeft : styles.segmentBoxLeft}>
-              <Text>All</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              onPress={this.setSegmentToPhoto}
-              style={this.state.segmentSelected === "photo" ? styles.segmentBoxSelectedCenter : styles.segmentBoxCenter}>
-              <Text>Photo</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              onPress={this.setSegmentToMessage}
-              style={this.state.segmentSelected === "message" ? styles.segmentBoxSelectedRight : styles.segmentBoxRight}>
-              <Text>Message</Text>
-            </TouchableOpacity>
-          </View>
-          <ScrollView>
-            <For
-              each="item"
-              of={this.state.items}
-            >
-              <Choose>
-                <When condition={this.state.segmentSelected === "all"}>
-                  <If condition={item.type === "photoPost"}>
-                    <ListPhotoItem
-                      key={item.identifier} 
-                      userName={item.userName}
-                      imageSource={item.imageURL}
-                      likesCount={item.likesCount}
-                      commentsCount={item.commentsCount}
-                      date={this.state.date}
-                    />
-                </If>
-                <If condition={item.type === "messagePost"}>
-                  <ListMessageItem 
-                    key={item.identifier} 
-                    userName={item.userName}
-                    userImage={item.imageURL}
-                    commentsCount={item.commentsCount}
-                    message={item.message}
-                    date={this.state.date}
-                  />
-                </If>
-                </When>
-                <When condition={this.state.segmentSelected === "photo"}>
-                  <If condition={item.type === "photoPost"}>
-                    <ListPhotoItem
-                      key={item.identifier} 
-                      userName={item.userName}
-                      imageSource={item.imageURL}
-                      likesCount={item.likesCount}
-                      commentsCount={item.commentsCount}
-                      date={this.state.date}
-                    />
+      <Provider store={store}>
+        <SideMenu 
+          menu={this.renderMenu()}
+          isOpen={this.state.isOpen}
+          onChange={isOpen => this.updateMenuState(isOpen)}
+        >
+          <View>
+            <Header
+              headerText="News"
+            />
+            <View style={{ flexDirection: 'row', height: 40 }}>
+              <TouchableOpacity 
+                onPress={this.setSegmentToAll}
+                style={this.state.segmentSelected === "all" ? styles.segmentBoxSelectedLeft : styles.segmentBoxLeft}>
+                <Text>All</Text>
+              </TouchableOpacity>
+              <TouchableOpacity 
+                onPress={this.setSegmentToPhoto}
+                style={this.state.segmentSelected === "photo" ? styles.segmentBoxSelectedCenter : styles.segmentBoxCenter}>
+                <Text>Photo</Text>
+              </TouchableOpacity>
+              <TouchableOpacity 
+                onPress={this.setSegmentToMessage}
+                style={this.state.segmentSelected === "message" ? styles.segmentBoxSelectedRight : styles.segmentBoxRight}>
+                <Text>Message</Text>
+              </TouchableOpacity>
+            </View>
+            <ScrollView>
+              <For
+                each="item"
+                of={this.state.items}
+              >
+                <Choose>
+                  <When condition={this.state.segmentSelected === "all"}>
+                    <If condition={item.type === "photoPost"}>
+                      <ListPhotoItem
+                        key={item.identifier} 
+                        userName={item.userName}
+                        imageSource={item.imageURL}
+                        likesCount={item.likesCount}
+                        commentsCount={item.commentsCount}
+                        date={this.state.date}
+                      />
                   </If>
-                </When>
-                <When condition={this.state.segmentSelected === "message"}>
                   <If condition={item.type === "messagePost"}>
                     <ListMessageItem 
                       key={item.identifier} 
@@ -154,13 +133,39 @@ export default class App extends Component {
                       date={this.state.date}
                     />
                   </If>
-                </When>
-              </Choose>
-            </For>
-            <View style={{ height: 100}}/>
-          </ScrollView>
-        </View>
-      </SideMenu>
+                  </When>
+                  <When condition={this.state.segmentSelected === "photo"}>
+                    <If condition={item.type === "photoPost"}>
+                      <ListPhotoItem
+                        key={item.identifier} 
+                        userName={item.userName}
+                        imageSource={item.imageURL}
+                        likesCount={item.likesCount}
+                        commentsCount={item.commentsCount}
+                        date={this.state.date}
+                      />
+                    </If>
+                  </When>
+                  <When condition={this.state.segmentSelected === "message"}>
+                    <If condition={item.type === "messagePost"}>
+                      <ListMessageItem 
+                        key={item.identifier} 
+                        userName={item.userName}
+                        userImage={item.imageURL}
+                        commentsCount={item.commentsCount}
+                        message={item.message}
+                        date={this.state.date}
+                      />
+                    </If>
+                  </When>
+                </Choose>
+              </For>
+              <View style={{ height: 100}}/>
+            </ScrollView>
+          </View>
+        </SideMenu>
+        
+      </Provider>
       
     );
   }
